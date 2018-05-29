@@ -13,9 +13,30 @@ var GlobalFlags = []cli.Flag{}
 
 // Action is main function
 func Action(c *cli.Context) error {
-	arr := strings.Split(c.Args()[0], " ")
+	a := strings.Split(c.Args()[0], " ")
+	s := []string{}
 
-	fmt.Println(len(arr))
+	s = append(s, a[0])
+	for i := range a {
+		c := 0
+		for j := range s {
+			if a[i] == s[j] {
+				break
+			}
+			c++
+
+			if c == len(s) {
+				s = append(s, a[i])
+			}
+		}
+	}
+
+	for i := range s {
+		fmt.Println(s[i])
+	}
+
+	fmt.Println(len(s))
+
 	return nil
 }
 
