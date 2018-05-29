@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 
@@ -9,10 +10,24 @@ import (
 )
 
 // GlobalFlags is cli flags
-var GlobalFlags = []cli.Flag{}
+var GlobalFlags = []cli.Flag{
+	cli.StringFlag{
+		Name:  "file, f",
+		Value: "",
+		Usage: "perse from file",
+	},
+}
 
 // Action is main function
 func Action(c *cli.Context) error {
+	if c.String("f") != "" {
+		_, e := ioutil.ReadFile(c.String("f"))
+		if e != nil {
+			fmt.Println(e)
+			return nil
+		}
+	}
+
 	a := strings.Split(c.Args()[0], " ")
 	s := []string{}
 
