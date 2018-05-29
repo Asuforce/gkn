@@ -1,4 +1,4 @@
-# gokan
+# gkn
 
 
 
@@ -11,12 +11,12 @@
 To install, use `go get`:
 
 ```bash
-$ go get -d github.com/asuforce/gokan
+$ go get -d github.com/asuforce/gkn
 ```
 
 ## Contribution
 
-1. Fork ([https://github.com/asuforce/gokan/fork](https://github.com/asuforce/gokan/fork))
+1. Fork ([https://github.com/asuforce/gkn/fork](https://github.com/asuforce/gkn/fork))
 1. Create a feature branch
 1. Commit your changes
 1. Rebase your local changes against the master branch
