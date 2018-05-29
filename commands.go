@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/urfave/cli"
 )
@@ -12,7 +13,9 @@ var GlobalFlags = []cli.Flag{}
 
 // Action is main function
 func Action(c *cli.Context) error {
-	fmt.Println("hello")
+	arr := strings.Split(c.Args()[0], " ")
+
+	fmt.Println(len(arr))
 	return nil
 }
 
