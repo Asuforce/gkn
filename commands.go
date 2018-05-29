@@ -28,7 +28,19 @@ func Action(c *cli.Context) error {
 		}
 	}
 
-	a := strings.Split(c.Args()[0], " ")
+	result := perseText(c.Args()[0])
+
+	for i := range result {
+		fmt.Println(result[i])
+	}
+
+	fmt.Println(len(result))
+
+	return nil
+}
+
+func perseText(text string) []string {
+	a := strings.Split(text, " ")
 	s := []string{}
 
 	s = append(s, a[0])
@@ -46,13 +58,7 @@ func Action(c *cli.Context) error {
 		}
 	}
 
-	for i := range s {
-		fmt.Println(s[i])
-	}
-
-	fmt.Println(len(s))
-
-	return nil
+	return s
 }
 
 // CommandNotFound is exception function
