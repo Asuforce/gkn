@@ -46,7 +46,9 @@ func chooseResource(c *cli.Context) string {
 }
 
 func perseText(text string) []string {
-	a := strings.Split(text, " ")
+	r := strings.NewReplacer("\n", " ", ",", "", ".", "")
+	t := r.Replace(text)
+	a := strings.Split(t, " ")
 	s := []string{}
 
 	s = append(s, a[0])
