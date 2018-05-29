@@ -20,15 +20,7 @@ var GlobalFlags = []cli.Flag{
 
 // Action is main function
 func Action(c *cli.Context) error {
-	if c.String("f") != "" {
-		_, e := ioutil.ReadFile(c.String("f"))
-		if e != nil {
-			fmt.Println(e)
-			return nil
-		}
-	}
-
-	result := perseText(c.Args()[0])
+	result := perseText(chooseResource(c))
 
 	for i := range result {
 		fmt.Println(result[i])
@@ -37,6 +29,20 @@ func Action(c *cli.Context) error {
 	fmt.Println(len(result))
 
 	return nil
+}
+
+func chooseResource(c *cli.Context) string {
+	if c.String("f") != "" {
+		data, e := ioutil.ReadFile(c.String("f"))
+		if e != nil {
+			fmt.Println(e)
+			return ""
+		}
+
+		return string(data)
+	} else {
+		return c.Args()[0]
+	}
 }
 
 func perseText(text string) []string {
