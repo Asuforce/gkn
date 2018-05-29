@@ -12,11 +12,9 @@ func main() {
 	app.Name = Name
 	app.Version = Version
 	app.Author = "asuforce"
-	app.Email = ""
-	app.Usage = ""
-
+	app.Usage = "count paragraph from your text"
 	app.Flags = GlobalFlags
-	app.Commands = Commands
+	app.Action = Action
 	app.CommandNotFound = CommandNotFound
 
 	app.Run(os.Args)
