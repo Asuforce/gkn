@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"errors"
 	"github.com/urfave/cli"
 )
 
@@ -20,7 +21,11 @@ var GlobalFlags = []cli.Flag{
 
 // Action is main function
 func Action(c *cli.Context) error {
-	result := perseText(chooseResource(c))
+	text, error := chooseResource(c); if error != nil {
+		fmt.Println(error)
+		return nil
+	}
+	result := perseText(text)
 
 	for i := range result {
 		fmt.Println(result[i])
@@ -31,18 +36,18 @@ func Action(c *cli.Context) error {
 	return nil
 }
 
-func chooseResource(c *cli.Context) string {
+func chooseResource(c *cli.Context) (string, error) {
 	if c.String("f") != "" {
-		data, e := ioutil.ReadFile(c.String("f"))
+		d, e := ioutil.ReadFile(c.String("f"))
 		if e != nil {
-			fmt.Println(e)
-			return ""
+			return "", e
 		}
 
-		return string(data)
-	} else {
-		return c.Args()[0]
+		return string(d), nil
+	} else if c.NArg() > 0 {
+		return c.Args().Get(0), nil
 	}
+	return "", errors.New("Missing filename or text argument")
 }
 
 func perseText(text string) []string {
